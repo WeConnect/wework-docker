@@ -1,6 +1,6 @@
 {
-  "#{node[:docker][:registry]}": {
-    "auth":   "#{node[:docker][:auth]}",
-    "email":  "#{node[:docker][:email]}"
+  "<%= node[:docker][:registry] %>": {
+    "auth":   "<%= node[:docker][:auth] %>",
+    "email":  "<%= node[:docker][:email] %>"
   }
 }
