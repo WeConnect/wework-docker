@@ -1,3 +1,5 @@
+include_recipe 'apt::repository'
+
 package 'apt-transport-https' do
   action :install
 end
