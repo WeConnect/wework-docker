@@ -6,20 +6,12 @@ package "docker.io" do
   action :install
 end
 
-directory '/var/lib/docker/devicemapper/devicemapper/data' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
+ruby_block 'mount /var/lib/docker' do
+  block do
+    Chef::Log.debug("/var/lib/docker probably not yet mounted - sleeping 10s")
+    sleep 10
+  end
 end
-
-directory '/var/lib/docker/devicemapper/devicemapper/metadata' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
-end
-
 
 service "docker" do
   action :start
