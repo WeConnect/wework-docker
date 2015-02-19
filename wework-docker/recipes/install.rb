@@ -10,9 +10,3 @@ apt_repository 'docker' do
 end
 
 package "lxc-docker" do
-  action :install
-end
-
-service "docker" do
-  action :start
-end
