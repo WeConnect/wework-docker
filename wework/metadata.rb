@@ -1,7 +1,0 @@
-name             'wework'
-maintainer       'YOUR_NAME'
-maintainer_email 'YOUR_EMAIL'
-license          'All rights reserved'
-description      'Installs/Configures wework'
-long_description 'Installs/Configures wework'
-version          '0.1.0'
