@@ -10,7 +10,6 @@ node["deploy"].each do |application, deploy|
       e = EnvHelper.new app_name, app_config, deploy, node
 
       image = app_config["image"]
-      tag   = app_config["tag"]
       containers = app_config["containers"] || 1
 
       environment = e.merged_environment
@@ -19,11 +18,11 @@ node["deploy"].each do |application, deploy|
 
       execute "pulling #{image}" do
         Chef::Log.debug("Pulling '#{image}'...")
-        command "docker pull #{image}:#{tag}"
+        command "docker pull #{image}:latest"
         not_if { e.manual? }
       end
 
-      containers.times do |i|
+      containers.to_i.times do |i|
         ruby_block "waiting" do
           block do
             sleep(app_config["startup_time"].to_i) if app_config["startup_time"] && i > 0

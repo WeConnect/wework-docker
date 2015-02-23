@@ -13,5 +13,3 @@ recipe "docker::data_volumes", "Creates data only containers"
 recipe "docker::exec", "Run docker exec on a container"
 recipe "docker::notify_rollbar", "Used to send post deploy notifications to rollbar"
 recipe "docker::logrotate", "Sets up correct log rotation for docker containers"
-
-depends "apt"
