@@ -1,0 +1,10 @@
+DEPENDENCIES
+  apt (~> 2.6.1)
+  wework-ami
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.6.1)
+  wework-ami (0.0.1)
+    apt (>= 0.0.0)

@@ -1,0 +1,12 @@
+DEPENDENCIES
+  apt (~> 2.6)
+  wework-docker
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.6.1)
+  logrotate (1.8.0)
+  wework-docker (0.0.2)
+    apt (>= 0.0.0)
+    logrotate (~> 1.8.0)
