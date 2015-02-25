@@ -1,0 +1,19 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[wework-docker-gen::default]
+    attributes:
+      docker-gen:
+        version: "0.3.7"
+        url: "https://github.com/jwilder/docker-gen/releases/download/0.3.7/docker-gen-linux-amd64-0.3.7.tar.gz"
+        checksum: "98856acc90c11aa755acb545b0c4187505d4a8fa8ca4187cd5c90e91ae31feef"
