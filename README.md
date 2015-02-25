@@ -20,7 +20,7 @@ some common examples:
 
 Adding a repo we own:
 ```shell
-git subtree add --prefix wework-cookbook git@github.com:WeConnect/cookbook.git --squash
+git subtree add --prefix wework-cookbook git@github.com:WeConnect/cookbook.git master --squash
 git remote add -f wework-cookbook git@github.com:WeConnect/cookbook.git
 ```
 
