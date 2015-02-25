@@ -48,3 +48,19 @@ git subtree push --prefix wework-cookbook/ wework-cookbook master --squash
 ```
 
 Note that you can still issue pull requests normally from `git@github.com:WeConnect/cookbook.git` to `git@github.com:Other/cookbook.git`
+
+Creating a new Cookbook
+-----------------------
+
+Create a new git repo named `wework-cookbook` and copy the url (something like
+`git@github.com:WeConnect/wework-cookbook.git`)
+
+```shell
+berks cookbook wework-cookbook cookbook --skip-git
+# Make changes to recipes/default.rb, LICENSE, etc.
+git add cookbook
+git commit -m "Initial commit"
+
+git remote add cookbook git@github.com:WeConnect/cookbook.git
+git subtree push --prefix cookbook/ cookbook master --squash
+```
