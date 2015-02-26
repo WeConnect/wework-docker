@@ -1,7 +1,0 @@
-DEPENDENCIES
-  wework-docker-gen
-    path: .
-    metadata: true
-
-GRAPH
-  wework-docker-gen (0.1.0)

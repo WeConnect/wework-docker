@@ -1,7 +1,0 @@
-name             'wework-docker-gen'
-maintainer       'Tom Clark'
-maintainer_email 'tom@wework.com'
-license          'All rights reserved'
-description      'Installs/Configures docker-gen'
-long_description 'Installs/Configures docker-gen'
-version          '0.1.0'
