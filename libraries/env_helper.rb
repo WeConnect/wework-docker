@@ -11,7 +11,7 @@ class EnvHelper
   def interpolations options = {}
     {
       public_ip: node[:opsworks][:instance][:ip],
-      app_name: "#{app_name}#{options[:container_id]}",
+      app_name: "#{service_name options[:container_id]}",
       opsworks: readable_hostname
     }
   end
@@ -28,19 +28,23 @@ class EnvHelper
     retrieve(app_config["env_from"]).merge(app_config["env"] || {})
   end
 
-  def env_string environment
+  def env_string environment, container_id
     if app_config["database"]
       {
-        "DB_ADAPTER" => deploy[:database][:adapter],
-        "DB_DATABASE" => deploy[:database][:database],
-        "DB_HOST" => deploy[:database][:host],
-        "DB_PASSWORD" => deploy[:database][:password],
-        "DB_PORT" => deploy[:database][:port],
-        "DB_RECONNECT" => deploy[:database][:reconnect],
-        "DB_USERNAME" =>  deploy[:database][:username],
+        "DB_ADAPTER"    => deploy[:database][:adapter],
+        "DB_DATABASE"   => deploy[:database][:database],
+        "DB_HOST"       => deploy[:database][:host],
+        "DB_PASSWORD"   => deploy[:database][:password],
+        "DB_PORT"       => deploy[:database][:port],
+        "DB_RECONNECT"  => deploy[:database][:reconnect],
+        "DB_USERNAME"   => deploy[:database][:username],
       }.each do |k,v|
         environment[k] = v
       end
+    end
+
+    if app_config["virtual_host"]
+      environment[:VIRTUAL_HOST] = app_config["virtual_host"] % interpolations(container_id: container_id)
     end
 
     stringify_hash(environment, "--env")
@@ -85,7 +89,15 @@ class EnvHelper
     if app_config["hostname"]
       app_config["hostname"] % interpolations(container_id: container_id)
     else
-      "#{app_name}#{container_id}." + node["opsworks"]["instance"]["hostname"]
+      "#{service_name container_id}.#{node["opsworks"]["instance"]["hostname"]}"
+    end
+  end
+
+  def service_name container_id
+    if container_id
+      "#{app_name}-%03d" % container_id
+    else
+      app_name
     end
   end
 
